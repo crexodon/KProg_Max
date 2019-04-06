@@ -5,8 +5,7 @@ import javax.swing.*;
 public class Max extends JFrame implements ActionListener{
     JButton[] buttons = new JButton[64];
     double[] values = new double[64];
-
-    double score = 0;
+    int count = 0;
 
     Max(){
         randomizeValue();
@@ -55,7 +54,15 @@ public class Max extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
-        //buttons.setBackground(Color.green);
+        count ++;
+        String pressedButton = ((JButton) e.getSource()).getText();
+        if(count % 2 == 0){
+            ((JButton) e.getSource()).setBackground(Color.blue);
+        } else{
+            ((JButton) e.getSource()).setBackground(Color.red);
+        }
+
+        System.out.println(pressedButton);
     }
 
     public static void main(String[] args){ new Max(); }
