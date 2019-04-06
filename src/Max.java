@@ -67,3 +67,10 @@ public class Max extends JFrame implements ActionListener{
 
     public static void main(String[] args){ new Max(); }
 }
+
+/**TODO
+ * Implement Labels for the values
+ * Have a score system going
+ * Implement the players (white/black)
+ * Make multiple classes so parallel work can be done
+ */
