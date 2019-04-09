@@ -2,12 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Max extends JFrame implements ActionListener{
+public class View extends JFrame implements ActionListener{
     JButton[] buttons = new JButton[64];
     double[] values = new double[64];
     int count = 0;
 
-    Max(){
+    View(){
         randomizeValue();
         generateButtonsPanel();
     }
@@ -65,7 +65,9 @@ public class Max extends JFrame implements ActionListener{
         System.out.println(pressedButton);
     }
 
-    public static void main(String[] args){ new Max(); }
+    public double[] getValues(){
+        return values;
+    }
 }
 
 /**TODO
