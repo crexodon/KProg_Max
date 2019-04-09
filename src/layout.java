@@ -11,108 +11,81 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class layout extends JFrame implements ActionListener{
 	
-	private ArrayList<JButton> buttonList = new ArrayList<JButton>();
-	private ArrayList<String> textList = new ArrayList<String>();
-	private String playerOne;
-	private String playerTwo;
-	
-	
 	public static void main(String[]args) {
 		layout view = new layout();
-		view.buildup();
 		view.setVisible(true);
 	}
 	
 	private layout() {
-		this.setSize(1000,600);
+		this.setSize(900,600);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);;
 		this.setLocationRelativeTo(null);
-		this.setLayout(new GridLayout(1,2));
+		this.setLayout(new GridLayout(1,3));
 		
 		createAndAssignPanels();
-		
-		
 	}
 	
 	private void createAndAssignPanels() {
 		
 		//Create Outer Panels
 		JPanel framePanelLeft = new JPanel();
+		JPanel framePanelMid = new JPanel();
 		JPanel framePanelRight = new JPanel();
 		
-		framePanelLeft.setLayout(new GridLayout(6,7));
-		framePanelRight.setLayout(new GridLayout(1,2));
+		framePanelLeft.setLayout(new GridLayout(8,4));
+		framePanelMid.setLayout(new GridLayout(8,4));
 		
-		for(int i = 0; i < 42; i++) {
+		for(int i = 0; i < 32; i++) {
 			framePanelLeft.add(new JButton());
+			framePanelMid.add(new JButton());
 		}
 		
-		//Create Inner Panels
-		JPanel innerPanelLeft = new JPanel();
-		JPanel innerPanelRight = new JPanel();
+		framePanelRight.setLayout(new GridLayout(4,1));
 		
-		innerPanelLeft.setLayout(new GridLayout(6,1));
+		JLabel scoreP1 = new JLabel("Player 1");
+		JLabel scoreP2 = new JLabel("Player 2");
 		
-		for(int i = 0; i < 24; i++) {
-			innerPanelLeft.add(new JButton());
-		}
+		JLabel scoreNumberP1 = new JLabel("25"); //Insert Variable of Score "Player 1" here
+		JLabel scoreNumberP2 = new JLabel("13"); //Insert Variable of Score "Player 2" here
 		
-		innerPanelRight.setLayout(new GridLayout(4,1));
-		
-		JPanel panelScoreP1 = new JPanel();
-		JPanel panelScoreP2 = new JPanel();
-		JPanel resetPanel = new JPanel();
-		JPanel startPanel = new JPanel();
-		
-		panelScoreP1.setLayout(new GridLayout(2,1));
-		
-		JLabel scoreP1 = new JLabel("Score Player 1");
-		scoreP1.setHorizontalAlignment(JLabel.CENTER);
-		panelScoreP1.add(scoreP1);
-		
-		JLabel scoreNumberP1 = new JLabel("25"); //Enter Variable of Score "Player 1" here
-		scoreNumberP1.setHorizontalAlignment(JLabel.CENTER);
-		panelScoreP1.add(scoreNumberP1);
-		
-		panelScoreP2.setLayout(new GridLayout(2,1));
-		
-		JLabel scoreP2 = new JLabel("Score Player2");
-		scoreP2.setHorizontalAlignment(JLabel.CENTER);
-		panelScoreP2.add(scoreP2);
-		
-		JLabel scoreNumberP2 = new JLabel("13"); //Enter Variable of Score "Player 2" here
-		scoreNumberP2.setHorizontalAlignment(JLabel.CENTER);
-		panelScoreP2.add(scoreNumberP2);
-		
-		resetPanel.setLayout(new GridLayout(4,1));
-		resetPanel.add(new JButton("Reset Game"));
-		
+		JButton resetButton = new JButton("Reset Game");
 		JButton startButton = new JButton("Start Game");
 		
-		startPanel.setLayout(new GridBagLayout());
-		startPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		startPanel.add(startButton);
+		scoreP1.setHorizontalAlignment(JLabel.CENTER);
+		scoreP2.setHorizontalAlignment(JLabel.CENTER);
+		scoreNumberP1.setHorizontalAlignment(JLabel.CENTER);
+		scoreNumberP2.setHorizontalAlignment(JLabel.CENTER);
 		
-		innerPanelRight.add(panelScoreP1);
-		innerPanelRight.add(panelScoreP2);
-		innerPanelRight.add(resetPanel);
-		innerPanelRight.add(startPanel);
+		JPanel panelPlayerOne = new JPanel();
+		JPanel panelPlayerTwo = new JPanel();
+		JPanel panelResetButton = new JPanel();
+		JPanel panelStartButton = new JPanel();
 		
-		//Add Inner Panels
-		framePanelRight.add(innerPanelLeft);
-		framePanelRight.add(innerPanelRight);
+		panelPlayerOne.setLayout(new GridLayout(2,1));
+		panelPlayerTwo.setLayout(new GridLayout(2,1));
+		panelResetButton.setLayout(new GridLayout(4,1));
+		panelStartButton.setLayout(new GridBagLayout());
+		panelStartButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		//Add Outer Panels
+		panelPlayerOne.add(scoreP1);
+		panelPlayerOne.add(scoreNumberP1);
+		
+		panelPlayerTwo.add(scoreP2);
+		panelPlayerTwo.add(scoreNumberP2);
+		
+		panelResetButton.add(resetButton);
+		panelStartButton.add(startButton);
+		
+		framePanelRight.add(panelPlayerOne);
+		framePanelRight.add(panelPlayerTwo);
+		framePanelRight.add(panelResetButton);
+		framePanelRight.add(panelStartButton);
+		
 		this.add(framePanelLeft);
+		this.add(framePanelMid);
 		this.add(framePanelRight);
-		
 	}
-
-	private void buildup() {
-		
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
