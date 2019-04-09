@@ -6,7 +6,7 @@ public class View extends JFrame implements ActionListener{
     private JButton[] buttons = new JButton[64];
     private String scoreW;
     private String scoreB;
-    private String[] values = new String[64];
+    private String[] fractions = new String[64];
 
     View(){
         //create Frame and Panels
@@ -57,7 +57,7 @@ public class View extends JFrame implements ActionListener{
         this.scoreB = scoreB;
     }
     public void setValues(String[] values){
-        this.values = values;
+        this.fractions = values;
     }
     //getter methods
     public String getScoreW(){
@@ -67,7 +67,7 @@ public class View extends JFrame implements ActionListener{
         return scoreB;
     }
     public String[] getValues() {
-        return values;
+        return fractions;
     }
 
     //refresh view for new data to draw
