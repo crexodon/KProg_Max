@@ -1,5 +1,5 @@
 public class Main {
-    public final void main(String[] args){
-
+    public static void main(String[] args){
+        Model model = new Model();
     }
 }
