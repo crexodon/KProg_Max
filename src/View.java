@@ -105,7 +105,7 @@ public class View extends JFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        //send current button over to model
+        //TODO send current button over to model (setButtonEvent)
     }
     //setter and getter methods
     public void setScoreW ( int scoreW){

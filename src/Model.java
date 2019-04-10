@@ -23,7 +23,6 @@ public class Model{
     }
 
     public void setButtonEvent(int buttonNumber){
-
         count++; //count the turn of the players
         if(count % 2 == 0){ //check which player is going and calculate their next possible step
             positionW = buttonNumber;
@@ -39,11 +38,11 @@ public class Model{
             positionBDown = buttonNumber + 8;
         }
 
-        //check which button has been pressed and then updatePositions()
+        //TODO check which button has been pressed and then updatePositions()
     }
 
     public void updatePositions(){
-        //send positions to View
+        //TODO send positions to View
     }
 
     private void randomizeValue() {
