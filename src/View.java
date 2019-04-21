@@ -21,7 +21,7 @@ public class View extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setLayout(new GridLayout(0,2));
+        this.setLayout(new GridLayout(1,3));
 
         createPanelsButtons();
 
@@ -35,23 +35,23 @@ public class View extends JFrame implements ActionListener{
         JPanel framePanelMid = new JPanel();
         JPanel framePanelRight = new JPanel();
 
-        framePanelLeft.setLayout(new GridLayout(8,8));
+        framePanelLeft.setLayout(new GridLayout(8,4));
         framePanelMid.setLayout(new GridLayout(8,4));
 
         //create button grid
-        for(int i = 0; i < 64; i++){
-            buttons[i] = new JButton(Integer.toString(i));
+        for(int i = 0; i < 32; i++){
+            buttons[i] = new JButton(fractions[i]);
             buttons[i].putClientProperty("button", i);
             buttons[i].addActionListener(this);
             framePanelLeft.add(buttons[i]);
         }
-        /**
+
         for(int i = 32; i < 64; i++){
-            buttons[i] = new JButton(Integer.toString(i));
+            buttons[i] = new JButton(fractions[i]);
             buttons[i].putClientProperty("button", i);
             buttons[i].addActionListener(this);
             framePanelMid.add(buttons[i]);
-        } **/
+        }
 
         framePanelRight.setLayout(new GridLayout(4,1));
 

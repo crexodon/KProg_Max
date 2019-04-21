@@ -18,7 +18,7 @@ public class Model{
 
     Model(){
         randomizeValue();
-        View view = new View(fractions, 0, 0, 28, 35);
+        View view = new View(fractions, 0, 0, 44, 19);
         view.setVisible(true);
     }
 
