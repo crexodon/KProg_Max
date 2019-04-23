@@ -45,6 +45,7 @@ public class MaxV extends JFrame{
             buttonPanel.add(buttons[i]);
         }
 
+        //initial placement of W and B
         buttons[positionW].setText("W");
         buttons[this.positionW].setBackground(Color.WHITE);
         buttons[this.positionW].setForeground(Color.BLACK);
@@ -60,8 +61,8 @@ public class MaxV extends JFrame{
 
     //anonymous class for a button actionevent
     private class ButtonClicked implements ActionListener{
-         double value;
-         int button;
+        double value;
+        int button;
 
         ButtonClicked(double value, int button){
             this.value = value;
@@ -88,7 +89,7 @@ public class MaxV extends JFrame{
             return false;
         }
 
-        //checks if the player wants to move over
+        //checks if the player wants to move over edge based on how the array is displayed
         private boolean checkEdge(int newPosition, int currentPosition){
             if(newPosition % 8 == 7 && currentPosition - newPosition == 1){
                 return false;
@@ -110,13 +111,15 @@ public class MaxV extends JFrame{
             count++;
             System.out.println(button + ": " + value + " / " + count);
 
+            //player w
             if(count % 2== 0){
                 if(checkPosition(button, positionW) && checkEdge(button, positionW) && checkMarked() && !finished) {
                     setPositionW(button);
                     addScoreW(value);
-                } else{
+                } else{ //if player couldn't move don't advance
                     count--;
                 }
+            //player b
             }else {
                 if(checkPosition(button, positionB) && checkEdge(button, positionB) && checkMarked() && !finished) {
                     setPositionB(button);
@@ -128,7 +131,7 @@ public class MaxV extends JFrame{
 
         }
     }
-
+    //sets new position, replaces old text with fraction and updates color
     public void setPositionW(int positionW){
         buttons[this.positionW].setText(fractions[this.positionW]);
         this.positionW = positionW;
@@ -143,6 +146,7 @@ public class MaxV extends JFrame{
         buttons[this.positionB].setBackground(Color.BLACK);
         buttons[this.positionB].setForeground(Color.WHITE);
     }
+    //adds score to current score and checks if a player has won
     public void addScoreW(double score){
         double newScore = this.scoreW + score;
         this.scoreW = newScore;
