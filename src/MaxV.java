@@ -13,12 +13,14 @@ public class MaxV extends JFrame{
     String[] fractions = new String[64];
     double[] values = new double[64];
 
-    double scoreW;
-    double scoreB;
+    double scoreW = 0;
+    double scoreB = 0;
     int positionW = 28;
     int positionB = 35;
 
     int count;
+    double finish = 60;
+    boolean finished = false;
 
 
     MaxV(){
@@ -39,6 +41,7 @@ public class MaxV extends JFrame{
         for(int i = 0; i < 64; i++){
             buttons[i] = new JButton(fractions[i]);
             buttons[i].addActionListener(new ButtonClicked(values[i], i));
+            buttons[i].setBackground(Color.GRAY);
             buttonPanel.add(buttons[i]);
         }
 
@@ -68,18 +71,14 @@ public class MaxV extends JFrame{
         private boolean checkPosition(int newPosition, int currentPosition) {
             //if player is either moving right or up
             if (newPosition - currentPosition < 0) {
-                System.out.println("negative");
                 if (Math.abs((newPosition - currentPosition)) == 8) {
-                    System.out.print("up");
                     return true;
                 } else if (Math.abs((newPosition - currentPosition)) == 1) {
-                    System.out.print("right");
                     return true;
                 }
             }
             //if player is moving right or down
             if (newPosition - currentPosition > 0) {
-                System.out.println("positive");
                 if ((newPosition - currentPosition) == 8) {
                     return true;
                 } else if ((newPosition - currentPosition) == 1) {
@@ -89,6 +88,7 @@ public class MaxV extends JFrame{
             return false;
         }
 
+        //checks if the player wants to move over
         private boolean checkEdge(int newPosition, int currentPosition){
             if(newPosition % 8 == 7 && currentPosition - newPosition == 1){
                 return false;
@@ -98,21 +98,27 @@ public class MaxV extends JFrame{
             return true;
         }
 
-
+        //checks if player wants to move on a marked field
+        private boolean checkMarked(){
+            if(buttons[button].getBackground() != Color.GRAY){
+                return false;
+            }
+            return true;
+        }
 
         public void actionPerformed(ActionEvent e){
             count++;
             System.out.println(button + ": " + value + " / " + count);
 
             if(count % 2== 0){
-                if(checkPosition(button, positionW) && checkEdge(button, positionW)) {
+                if(checkPosition(button, positionW) && checkEdge(button, positionW) && checkMarked() && !finished) {
                     setPositionW(button);
                     addScoreW(value);
                 } else{
                     count--;
                 }
             }else {
-                if(checkPosition(button, positionB) && checkEdge(button, positionB)) {
+                if(checkPosition(button, positionB) && checkEdge(button, positionB) && checkMarked() && !finished) {
                     setPositionB(button);
                     addScoreB(value);
                 } else{
@@ -141,11 +147,29 @@ public class MaxV extends JFrame{
         double newScore = this.scoreW + score;
         this.scoreW = newScore;
         System.out.println("PlayerW Score: " + this.scoreW);
+
+        //check if won
+        if(this.scoreW >= finish){
+            for(int i = 0; i < 64; i++){
+                buttons[i].setBackground(Color.BLACK);
+                buttons[i].setForeground(Color.WHITE);
+            }
+            finished = true;
+        }
     }
     public void addScoreB(double score){
         double newScore = this.scoreW + score;
         this.scoreB = newScore;
         System.out.println("PlayerW Score: " + this.scoreB);
+
+        //check if won
+        if(this.scoreB >= finish){
+            for(int i = 0; i < 64; i++){
+                buttons[i].setBackground(Color.BLACK);
+                buttons[i].setForeground(Color.WHITE);
+            }
+            finished = true;
+        }
     }
 
     public void randomizeValue(){
