@@ -9,18 +9,18 @@ public class MaxV extends JFrame{
         MaxV maxv = new MaxV();
     }
 
-    JButton[] buttons = new JButton[64];
-    String[] fractions = new String[64];
-    double[] values = new double[64];
+    private JButton[] buttons = new JButton[64];
+    private String[] fractions = new String[64];
+    private double[] values = new double[64];
 
-    double scoreW = 0;
-    double scoreB = 0;
-    int positionW = 28;
-    int positionB = 35;
+    private double scoreW = 0;
+    private double scoreB = 0;
+    private int positionW = 28;
+    private int positionB = 35;
 
-    int count;
-    double finish = 60;
-    boolean finished = false;
+    private int count;
+    private double finish = 60;
+    private boolean finished = false;
 
 
     MaxV(){
