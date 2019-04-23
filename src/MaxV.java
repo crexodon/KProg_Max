@@ -65,47 +65,54 @@ public class MaxV extends JFrame{
             this.button = button;
         }
         //checks the position and returns true if the new position is allowed
-        private boolean checkPosition(int newPosition, int currentPosition){
-            boolean statePos = false;
-            if(newPosition - currentPosition < 0){
+        private boolean checkPosition(int newPosition, int currentPosition) {
+            //if player is either moving right or up
+            if (newPosition - currentPosition < 0) {
                 System.out.println("negative");
-                if(Math.abs((newPosition - currentPosition)) == 8){
-                    statePos = true;
-                } else if(Math.abs((newPosition - currentPosition)) == 1){
-                    statePos = true;
-                } else{
-                    statePos = false;
+                if (Math.abs((newPosition - currentPosition)) == 8) {
+                    System.out.print("up");
+                    return true;
+                } else if (Math.abs((newPosition - currentPosition)) == 1) {
+                    System.out.print("right");
+                    return true;
                 }
             }
-            if(newPosition - currentPosition > 0){
+            //if player is moving right or down
+            if (newPosition - currentPosition > 0) {
                 System.out.println("positive");
-                if((newPosition - currentPosition) == 8){
-                    statePos = true;
-                } else if((newPosition - currentPosition) == 1){
-                    statePos = true;
-                } else{
-                    statePos = false;
+                if ((newPosition - currentPosition) == 8) {
+                    return true;
+                } else if ((newPosition - currentPosition) == 1) {
+                    return true;
                 }
             }
-            else{
-                statePos = false;
-            }
-            return statePos;
+            return false;
         }
+
+        private boolean checkEdge(int newPosition, int currentPosition){
+            if(newPosition % 8 == 7 && currentPosition - newPosition == 1){
+                return false;
+            } else if(currentPosition % 8 == 7 && newPosition - currentPosition == 1){
+                return false;
+            }
+            return true;
+        }
+
+
 
         public void actionPerformed(ActionEvent e){
             count++;
             System.out.println(button + ": " + value + " / " + count);
 
             if(count % 2== 0){
-                if(checkPosition(button, positionW)) {
+                if(checkPosition(button, positionW) && checkEdge(button, positionW)) {
                     setPositionW(button);
                     addScoreW(value);
                 } else{
                     count--;
                 }
             }else {
-                if(checkPosition(button, positionB)) {
+                if(checkPosition(button, positionB) && checkEdge(button, positionB)) {
                     setPositionB(button);
                     addScoreB(value);
                 } else{
