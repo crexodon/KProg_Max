@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,18 +28,27 @@ public class mainMenu extends JFrame implements ActionListener {
 	
 	public void initPanel() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		
+		JPanel innerPanel = new JPanel();
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+		innerPanel.setBorder(new EmptyBorder(200,0,200,0));
+		
 		JButton startButton = new JButton("Neues Spiel starten");
 		JButton loadButton = new JButton("Spiel Laden");
 		
 		startButton.setName("start");
 		loadButton.setName("load");
 		
+		startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		loadButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		startButton.addActionListener(this);
 		loadButton.addActionListener(this);
 		
-		mainPanel.add(startButton);
-		mainPanel.add(loadButton);
+		innerPanel.add(startButton);
+		innerPanel.add(Box.createVerticalStrut(10));
+		innerPanel.add(loadButton);
+		mainPanel.add(innerPanel);
 		this.add(mainPanel);
 	}
 
