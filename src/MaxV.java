@@ -68,7 +68,7 @@ public class MaxV extends JFrame implements Serializable{
         JPanel saveGamePanel = new JPanel();
 
         //Make saveGame button and add to Panel
-        JButton saveGameButton = new JButton("Save Game");
+        JButton saveGameButton = new JButton("Save Game (Sort-of works");
         saveGameButton.addActionListener(new SaveGame());
         saveGamePanel.setBorder(new EmptyBorder(10,10,10,10));
         saveGamePanel.add(saveGameButton);
@@ -106,7 +106,7 @@ public class MaxV extends JFrame implements Serializable{
         private static final long serialVersionUID = 1L;
         public void actionPerformed(ActionEvent e){
             try {
-                FileOutputStream fs = new FileOutputStream(this.getClass().getName());
+                FileOutputStream fs = new FileOutputStream(this.getClass().getName() + ".ser");
                 ObjectOutputStream os = new ObjectOutputStream(fs);
                 os.writeObject(maxV);
                 System.out.println("Saved");

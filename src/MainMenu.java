@@ -44,7 +44,7 @@ public class MainMenu extends JFrame{
 		JButton loadButton = new JButton("Load Game");
 		
 		startButton.setName("start");
-		loadButton.setName("load");
+		loadButton.setName("load (doesn't work yet");
 		
 		startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		loadButton.setAlignmentX(Component.CENTER_ALIGNMENT);
