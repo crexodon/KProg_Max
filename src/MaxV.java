@@ -5,11 +5,12 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
-public class MaxV extends JFrame{
+public class MaxV extends JFrame implements Serializable{
 
     public static void main(String[] args){
-    	mainMenu menu = new mainMenu();
+    	MainMenu menu = new MainMenu();
     }
     
     MaxV maxV;
@@ -19,7 +20,9 @@ public class MaxV extends JFrame{
     double[] values = new double[64];
     
     double scoreW = 0;
+    JLabel scoreWLabel = new JLabel();
     double scoreB = 0;
+    JLabel scoreBLabel = new JLabel();
     int positionW = 28;
     int positionB = 35;
 
@@ -55,18 +58,18 @@ public class MaxV extends JFrame{
         
         //Adjust Score panels
         scoreWPanel.setBorder(new TitledBorder("Score Player White"));
-        JLabel scoreW = new JLabel("0");
-        scoreWPanel.add(scoreW);
+        scoreWLabel = new JLabel(Double.toString(scoreW));
+        scoreWPanel.add(scoreWLabel);
         scoreBPanel.setBorder(new TitledBorder("Score Player Black"));
-        JLabel scoreB = new JLabel("0");
-        scoreBPanel.add(scoreB);
+        scoreBLabel = new JLabel(Double.toString((scoreB)));
+        scoreBPanel.add(scoreBLabel);
         
         //make Panel with saveGame button
         JPanel saveGamePanel = new JPanel();
 
         //Make saveGame button and add to Panel
-        JButton saveGameButton = new JButton("Spiel Speichern");
-        /**saveGameButton.addActionListener(new saveGame(maxV));*/
+        JButton saveGameButton = new JButton("Save Game");
+        saveGameButton.addActionListener(new SaveGame());
         saveGamePanel.setBorder(new EmptyBorder(10,10,10,10));
         saveGamePanel.add(saveGameButton);
         
@@ -99,9 +102,22 @@ public class MaxV extends JFrame{
         maxV.add(textPanel, BorderLayout.PAGE_START);
         maxV.setVisible(true);
     }
-    
-    
+    private class SaveGame implements  ActionListener{
+        private static final long serialVersionUID = 1L;
+        public void actionPerformed(ActionEvent e){
+            try {
+                FileOutputStream fs = new FileOutputStream(this.getClass().getName());
+                ObjectOutputStream os = new ObjectOutputStream(fs);
+                os.writeObject(maxV);
+                System.out.println("Saved");
+                os.close();
+            } catch (IOException erro){
+                System.err.println((erro));
+            }
+        }
 
+
+    }
 
     //anonymous class for a button actionevent
     private class ButtonClicked implements ActionListener{
@@ -192,6 +208,7 @@ public class MaxV extends JFrame{
         double newScore = this.scoreW + score;
         this.scoreW = newScore;
         System.out.println("PlayerW Score: " + this.scoreW);
+        scoreWLabel.setText(Double.toString(this.scoreW));
 
         //check if won
         if(this.scoreW >= finish){
@@ -206,6 +223,7 @@ public class MaxV extends JFrame{
         double newScore = this.scoreW + score;
         this.scoreB = newScore;
         System.out.println("PlayerW Score: " + this.scoreB);
+        scoreBLabel.setText(Double.toString(this.scoreB));
 
         //check if won
         if(this.scoreB >= finish){
