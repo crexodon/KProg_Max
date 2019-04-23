@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,13 +9,15 @@ import java.awt.event.ActionListener;
 public class MaxV extends JFrame{
 
     public static void main(String[] args){
-        MaxV maxv = new MaxV();
+    	mainMenu menu = new mainMenu();
     }
-
+    
+    MaxV maxV;
+    
     JButton[] buttons = new JButton[64];
     String[] fractions = new String[64];
     double[] values = new double[64];
-
+    
     double scoreW = 0;
     double scoreB = 0;
     int positionW = 28;
@@ -24,16 +29,48 @@ public class MaxV extends JFrame{
 
 
     MaxV(){
+    	
+    	maxV = this;
+    	
         //set JFrame
-        this.setSize(600, 600);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setLayout(new GridLayout(1,1));
+        maxV.setSize(600, 600);
+        maxV.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        maxV.setLocationRelativeTo(null);
+        maxV.setResizable(false);
+        maxV.setLayout(new BorderLayout());
+        
 
-        //make buttonPanel
+        //make left Panel side for game buttons
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setSize(600,600);
         buttonPanel.setLayout(new GridLayout(8,8));
+        
+        //make right panel Side for score and SaveGame
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new GridLayout(1,3));
+        
+        //make Panel with scores
+        JPanel scoreWPanel = new JPanel();
+        JPanel scoreBPanel = new JPanel();
+        
+        //Adjust Score panels
+        scoreWPanel.setBorder(new TitledBorder("Score Player White"));
+        JLabel scoreW = new JLabel("0");
+        scoreWPanel.add(scoreW);
+        scoreBPanel.setBorder(new TitledBorder("Score Player Black"));
+        JLabel scoreB = new JLabel("0");
+        scoreBPanel.add(scoreB);
+        
+        //make Panel with saveGame button
+        JPanel saveGamePanel = new JPanel();
 
+        //Make saveGame button and add to Panel
+        JButton saveGameButton = new JButton("Spiel Speichern");
+        /**saveGameButton.addActionListener(new saveGame(maxV));*/
+        saveGamePanel.setBorder(new EmptyBorder(10,10,10,10));
+        saveGamePanel.add(saveGameButton);
+        
+        
         //create random values
         randomizeValue();
 
@@ -46,16 +83,24 @@ public class MaxV extends JFrame{
         }
 
         buttons[positionW].setText("W");
-        buttons[this.positionW].setBackground(Color.WHITE);
-        buttons[this.positionW].setForeground(Color.BLACK);
+        buttons[maxV.positionW].setBackground(Color.WHITE);
+        buttons[maxV.positionW].setForeground(Color.BLACK);
         buttons[positionB].setText("B");
-        buttons[this.positionB].setBackground(Color.BLACK);
-        buttons[this.positionB].setForeground(Color.WHITE);
+        buttons[maxV.positionB].setBackground(Color.BLACK);
+        buttons[maxV.positionB].setForeground(Color.WHITE);
 
+        //add score and button Panels to textPanel
+        textPanel.add(scoreWPanel);
+        textPanel.add(scoreBPanel);
+        textPanel.add(saveGamePanel);
+        
         //add panel to frame
-        this.add(buttonPanel);
-        this.setVisible(true);
+        maxV.add(buttonPanel, BorderLayout.CENTER);
+        maxV.add(textPanel, BorderLayout.PAGE_START);
+        maxV.setVisible(true);
     }
+    
+    
 
 
     //anonymous class for a button actionevent
